@@ -57,7 +57,7 @@ const link = new HttpLink({ uri: 'http://api.githunt.com/graphql', fetch });
 
 In GraphQL execution, `context` is often used to pass around information about authentication or other secrets. If you need these inside your Link to call the underlying API, it's easy to pass them through, since they will be included on the `graphqlContext` field.
 
-For example, to add authentication headers, modify the link to include an authentication header:
+For example, to add authorization headers, modify the link to include an authorization header:
 
 ```js
 const { setContext } = require('apollo-link-context');
@@ -67,7 +67,7 @@ const http = new HttpLink({ uri: 'http://api.githunt.com/graphql', fetch });
 
 const link = setContext((request, previousContext) => ({
   headers: {
-    'Authentication': `Bearer ${previousContext.graphqlContext.authKey}`,
+    'Authorization': `Bearer ${previousContext.graphqlContext.authKey}`,
   }
 })).concat(http);
 ```
